@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ujian Online BAB 1 - Pendidikan Agama Katolik Kelas 1 SD</title>
+  
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #e0f2fe 0%, #fef3c7 50%, #fce7f3 100%);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    /* 3D Pixar Styled Elements */
+    .card-3d {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      box-shadow: 0 16px 0 #cbd5e1, 0 24px 32px rgba(0, 0, 0, 0.08);
+      border: 3px solid #f8fafc;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-3d-primary {
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+      box-shadow: 0 8px 0 #0369a1, 0 14px 18px rgba(2, 132, 199, 0.35);
+      border-radius: 20px;
+      color: white;
+      font-weight: 800;
+      transition: all 0.15s ease;
+    }
+    .btn-3d-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 0 #0369a1, 0 18px 22px rgba(2, 132, 199, 0.4);
+    }
+    .btn-3d-primary:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #0369a1, 0 4px 6px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-3d-success {
+      background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%);
+      box-shadow: 0 8px 0 #15803d, 0 14px 18px rgba(22, 163, 74, 0.35);
+      border-radius: 20px;
+      color: white;
+      font-weight: 800;
+    }
+    .btn-3d-success:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #15803d;
+    }
+
+    .btn-3d-amber {
+      background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+      box-shadow: 0 8px 0 #b45309, 0 14px 18px rgba(217, 119, 6, 0.35);
+      border-radius: 20px;
+      color: white;
+      font-weight: 800;
+    }
+    .btn-3d-amber:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #b45309;
+    }
+
+    .option-btn {
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: 0 6px 0 #cbd5e1;
+      transition: all 0.18s ease;
+      text-align: left;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: #38bdf8;
+      background: #f0f9ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 #93c5fd;
+    }
+    .option-btn:active:not(:disabled) {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #93c5fd;
+    }
+    .option-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #22c55e !important;
+      box-shadow: 0 6px 0 #16a34a !important;
+      color: #15803d !important;
+    }
+    .option-btn.locked-wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      box-shadow: 0 6px 0 #b91c1c !important;
+      color: #b91c1c !important;
+      cursor: not-allowed;
+    }
+
+    /* Modal / Toast Animations */
+    .toast-anim {
+      animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.6) translateY(40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* Print Stylesheet for Mode Guru */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print, header, nav, button, .action-buttons, #toast-container {
+        display: none !important;
+      }
+      .card-3d {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+    }
+    .print-only {
+      display: none;
+    }
+  </style>
+</head>
+<body class="p-3 md:p-6 flex flex-col justify-between">
+
+  <!-- TOP HEADER / NAVBAR -->
+  <header class="max-w-6xl w-full mx-auto mb-6 flex flex-wrap items-center justify-between gap-4 bg-white/90 backdrop-blur-md px-6 py-4 rounded-3xl border-2 border-white shadow-lg no-print">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 bg-sky-500 rounded-2xl flex items-center justify-center text-2xl shadow-md shadow-sky-200">
+        ✨
+      </div>
+      <div>
+        <h1 class="text-xl font-black text-sky-800 tracking-tight">SD SANTO YOSEF</h1>
+        <p class="text-xs font-bold text-sky-600 uppercase tracking-wider">Ujian Harian BAB 1: Pendidikan Agama Katolik Kelas 1</p>
+      </div>
+    </div>
+
+    <!-- Mode Badge & Quick Switcher -->
+    <div class="flex items-center gap-3">
+      <div id="user-pill" class="hidden px-4 py-2 bg-sky-100 border border-sky-300 rounded-2xl text-sky-800 font-bold text-xs md:text-sm flex items-center gap-2">
+        <span>👤</span>
+        <span id="pill-name">Siswa</span>
+        <span class="bg-sky-500 text-white text-[11px] px-2 py-0.5 rounded-full font-black" id="pill-class">1A</span>
+      </div>
+
+      <button id="btn-logout" onclick="logout()" class="hidden px-4 py-2 bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold rounded-2xl text-xs md:text-sm transition flex items-center gap-1 border border-rose-200 shadow-sm">
+        🚪 Logout
+      </button>
+
+      <button id="btn-switch-mode" onclick="openTeacherLoginModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-extrabold rounded-2xl text-xs md:text-sm shadow-md shadow-amber-200 transition transform active:scale-95 flex items-center gap-1.5">
+        🔒 Mode Guru
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl w-full mx-auto flex-1">
+
+    <!-- 1. LANDING & LOGIN SISWA -->
+    <section id="view-student-login" class="max-w-xl mx-auto my-8">
+      <div class="card-3d p-8 text-center relative overflow-hidden">
+        <!-- 3D Header Avatar/Banner -->
+        <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-tr from-amber-300 via-sky-400 to-indigo-400 rounded-3xl p-1 shadow-inner shadow-white flex items-center justify-center">
+          <div class="w-full h-full bg-white rounded-[22px] flex items-center justify-center text-5xl">
+            🎒
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-black text-slate-800 mb-2">Halo Sahabat Cilik! 👋</h2>
+        <p class="text-slate-500 font-semibold text-sm mb-6">
+          Selamat datang di <span class="text-sky-600 font-bold">Ujian Online BAB 1</span><br>
+          <span class="text-xs bg-sky-100 text-sky-800 px-3 py-1 rounded-full font-bold">Materi: Diriku &bull; Diriku Dicintai Tuhan &bull; Diriku dan Temanku</span>
+        </p>
+
+        <!-- Form Input Siswa -->
+        <div class="space-y-4 text-left max-w-md mx-auto">
+          <div>
+            <label class="block text-xs font-black text-slate-700 uppercase mb-2">Nama Lengkap Kamu:</label>
+            <input type="text" id="input-student-name" placeholder="Tuliskan nama lengkap..." 
+              class="w-full px-5 py-3.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 focus:bg-sky-50/50 outline-none font-bold text-slate-700 transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-black text-slate-700 uppercase mb-2">Pilih Kelas:</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="cursor-pointer">
+                <input type="radio" name="student-class" value="1A" checked class="peer sr-only">
+                <div class="p-4 rounded-2xl border-2 border-slate-200 peer-checked:border-sky-500 peer-checked:bg-sky-50 peer-checked:shadow-md text-center font-black text-slate-700 transition">
+                  🏫 Kelas 1A
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="student-class" value="1B" class="peer sr-only">
+                <div class="p-4 rounded-2xl border-2 border-slate-200 peer-checked:border-sky-500 peer-checked:bg-sky-50 peer-checked:shadow-md text-center font-black text-slate-700 transition">
+                  🏫 Kelas 1B
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Petunjuk Pengerjaan Ringkas -->
+          <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 text-xs text-amber-900 font-medium space-y-1">
+            <p class="font-bold flex items-center gap-1">📌 Petunjuk Ujian:</p>
+            <p>1. Waktu pengerjaan soal adalah <strong>60 menit</strong>.</p>
+            <p>2. Berisi <strong>30 soal</strong> (Pilihan Ganda & Isian).</p>
+            <p>3. Jika menjawab salah, soal <strong>otomatis terkunci</strong>! 🔒</p>
+          </div>
+
+          <button onclick="startExam()" class="w-full py-4 btn-3d-primary text-lg mt-4 flex items-center justify-center gap-2">
+            <span>Mulai Mengerjakan Ujian</span>
+            <span class="text-xl">🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. EXAM INTERACTIVE VIEW -->
+    <section id="view-student-exam" class="hidden">
+      <!-- Status Bar: Timer, Subbab, Progress -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <!-- Subbab Badge -->
+        <div class="card-3d p-4 flex items-center gap-3">
+          <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl font-black">
+            📖
+          </div>
+          <div>
+            <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block">Bagian Subbab</span>
+            <span id="current-subbab-title" class="text-sm font-extrabold text-sky-800 line-clamp-1">Subbab 1: Diriku</span>
+          </div>
+        </div>
+
+        <!-- Timer Countdown -->
+        <div class="card-3d p-4 flex items-center justify-center gap-3 border-amber-200 bg-amber-50/70">
+          <div class="w-12 h-12 bg-amber-400 text-white rounded-2xl flex items-center justify-center text-2xl animate-pulse">
+            ⏱️
+          </div>
+          <div class="text-center">
+            <span class="text-[11px] font-extrabold text-amber-800 uppercase tracking-wider block">Sisa Waktu Pengerjaan</span>
+            <span id="exam-timer" class="text-2xl font-black text-amber-600 tracking-wider">60:00</span>
+          </div>
+        </div>
+
+        <!-- Score & Finish Action -->
+        <div class="card-3d p-4 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <div class="text-xs">
+              <span class="block text-slate-400 font-bold">Terjawab:</span>
+              <span class="text-base font-black text-slate-700" id="answered-counter">0 / 30</span>
+            </div>
+          </div>
+          <button onclick="confirmFinishExam()" class="px-4 py-2.5 btn-3d-success text-xs font-black flex items-center gap-1.5">
+            <span>Selesai & Keluar</span>
+            <span>🏁</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Content & Question Navigator -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+        
+        <!-- Left: Current Question Card -->
+        <div class="lg:col-span-3 card-3d p-6 md:p-8 relative">
+          <!-- Header Soal -->
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="px-3.5 py-1.5 bg-sky-500 text-white font-black rounded-xl text-xs md:text-sm shadow-sm" id="question-number-badge">
+                Soal No. 1
+              </span>
+              <span class="px-3 py-1 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs" id="question-type-badge">
+                Pilihan Ganda
+              </span>
+            </div>
+            
+            <div id="question-status-pill" class="text-xs font-extrabold px-3 py-1 rounded-xl bg-slate-100 text-slate-500">
+              Belum Dijawab
+            </div>
+          </div>
+
+          <!-- Question Text -->
+          <div class="mb-6">
+            <h3 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed mb-4">
+              <!-- Text Soal dimuat di sini -->
+            </h3>
+            
+            <!-- Optional Visual Illustration Prompt Box -->
+            <div id="question-illustration" class="hidden bg-sky-50 border-2 border-sky-100 rounded-2xl p-4 mb-4 flex items-center gap-3">
+              <span class="text-2xl">🖼️</span>
+              <p class="text-xs md:text-sm font-semibold text-sky-800 italic" id="illustration-text"></p>
+            </div>
+          </div>
+
+          <!-- Multiple Choice Options Container -->
+          <div id="options-container" class="space-y-3 mb-6">
+            <!-- Pilihan A, B, C, D di-render dinamis -->
+          </div>
+
+          <!-- Essay / Isian Container -->
+          <div id="essay-container" class="hidden mb-6">
+            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Tuliskan Jawaban Singkat Kamu:</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input type="text" id="input-essay" placeholder="Ketik jawaban di sini..." 
+                class="flex-1 px-5 py-3.5 rounded-2xl border-2 border-slate-200 focus:border-sky-500 outline-none font-bold text-slate-700">
+              <button id="btn-submit-essay" onclick="submitEssayAnswer()" class="btn-3d-primary px-6 py-3.5 text-sm font-black whitespace-nowrap">
+                Kirim Jawaban ✍️
+              </button>
+            </div>
+            <p class="text-[11px] text-slate-400 font-semibold mt-2">💡 Tips: Ketik jawaban dengan huruf yang jelas dan teliti.</p>
+          </div>
+
+          <!-- Navigation Buttons (Prev / Next) -->
+          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+            <button onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 text-sm transition">
+              ⬅️ Sebelumnya
+            </button>
+            <button onclick="nextQuestion()" id="btn-next" class="px-5 py-2.5 btn-3d-primary text-sm font-extrabold">
+              Selanjutnya ➡️
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: 30 Questions Grid Indicator -->
+        <div class="lg:col-span-1 card-3d p-6">
+          <h4 class="font-extrabold text-sm text-slate-800 mb-3 flex items-center justify-between">
+            <span>Daftar 30 Soal</span>
+            <span class="text-xs text-sky-600 bg-sky-50 px-2 py-0.5 rounded-lg font-bold">BAB 1</span>
+          </h4>
+
+          <div class="grid grid-cols-5 gap-2 max-h-80 overflow-y-auto pr-1" id="question-grid">
+            <!-- 30 Buttons generated here -->
+          </div>
+
+          <!-- Legend -->
+          <div class="mt-4 pt-4 border-t border-slate-100 text-[11px] font-bold space-y-1.5 text-slate-500">
+            <div class="flex items-center gap-2">
+              <span class="w-3.5 h-3.5 rounded-md bg-slate-200 inline-block"></span>
+              <span>Belum Dikerjakan</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3.5 h-3.5 rounded-md bg-green-500 inline-block"></span>
+              <span>Benar (👍)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3.5 h-3.5 rounded-md bg-rose-500 inline-block"></span>
+              <span>Salah / Terkunci (🔒)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. STUDENT EXAM RESULT VIEW -->
+    <section id="view-student-result" class="hidden max-w-2xl mx-auto my-6">
+      <div class="card-3d p-8 text-center relative overflow-hidden">
+        <div class="w-28 h-28 mx-auto mb-4 bg-gradient-to-tr from-amber-400 to-yellow-300 rounded-3xl p-1 shadow-lg shadow-amber-200 flex items-center justify-center">
+          <span class="text-6xl animate-bounce" id="result-emoji">🏆</span>
+        </div>
+
+        <h2 class="text-3xl font-black text-slate-800 mb-1">Hebat, Ujian Selesai!</h2>
+        <p class="text-slate-500 font-semibold text-sm mb-6">Berikut adalah hasil evaluasi belajarmu:</p>
+
+        <!-- Identity Pill -->
+        <div class="inline-flex items-center gap-3 bg-slate-50 border border-slate-200 px-5 py-2.5 rounded-2xl mb-6">
+          <span class="text-sm font-black text-slate-700" id="res-student-name">Nama Siswa</span>
+          <span class="bg-sky-500 text-white text-xs px-2.5 py-0.5 rounded-full font-extrabold" id="res-student-class">1A</span>
+        </div>
+
+        <!-- Big Score Box -->
+        <div class="bg-gradient-to-br from-sky-500 to-indigo-600 rounded-3xl p-6 text-white shadow-xl shadow-sky-200 max-w-sm mx-auto mb-6">
+          <span class="text-xs font-black tracking-widest uppercase opacity-80 block">Nilai Perolehan</span>
+          <div class="text-6xl font-black tracking-tight my-1" id="res-final-score">0</div>
+          <span class="text-xs font-bold bg-white/20 px-3 py-1 rounded-full inline-block" id="res-score-status">Sangat Memuaskan! 🌟</span>
+        </div>
+
+        <!-- Stats Breakdown Cards -->
+        <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+          <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4">
+            <span class="text-2xl mb-1 block">👍</span>
+            <span class="text-xs font-black text-emerald-800 uppercase block">Jumlah Benar</span>
+            <span class="text-3xl font-black text-emerald-600" id="res-correct-count">0</span>
+          </div>
+
+          <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-4">
+            <span class="text-2xl mb-1 block">💪</span>
+            <span class="text-xs font-black text-rose-800 uppercase block">Jumlah Salah</span>
+            <span class="text-3xl font-black text-rose-600" id="res-wrong-count">0</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <button onclick="logout()" class="btn-3d-primary px-8 py-3.5 text-sm font-extrabold">
+            Kembali ke Menu Utama 🚪
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TEACHER DASHBOARD (MODE GURU) -->
+    <section id="view-teacher-dashboard" class="hidden">
+      <!-- Print Header (Hanya muncul saat cetak) -->
+      <div class="print-only mb-6 border-b-2 border-black pb-4 text-center">
+        <h2 class="text-xl font-bold uppercase tracking-wider">SD SANTO YOSEF</h2>
+        <p class="text-sm">DAFTAR NILAI EVALUASI BAB 1: PENDIDIKAN AGAMA KATOLIK</p>
+        <p class="text-xs text-gray-500">Tahun Ajaran 2026/2027 - Kelas 1A & 1B</p>
+      </div>
+
+      <!-- Teacher Header & Stats -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 no-print">
+        <div>
+          <h2 class="text-2xl font-black text-slate-800 flex items-center gap-2">
+            <span>📊 Mode Guru: Canvasheet Daftar Nilai</span>
+            <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold">Terkoneksi Aktif</span>
+          </h2>
+          <p class="text-xs font-semibold text-slate-500">Pantau hasil capaian belajar siswa kelas 1A & 1B secara real-time.</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="px-4 py-2.5 btn-3d-amber text-xs font-black flex items-center gap-1.5">
+            <span>🖨️ Cetak Daftar Nilai</span>
+          </button>
+          <button onclick="logout()" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 font-bold text-slate-700 text-xs rounded-2xl transition">
+            Keluar Mode Guru 🚪
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 no-print">
+        <div class="card-3d p-4 border-l-8 border-sky-500">
+          <span class="text-xs font-black text-slate-400 uppercase">Total Peserta Didik</span>
+          <div class="text-3xl font-black text-sky-700 mt-1" id="stat-total-students">0</div>
+        </div>
+        <div class="card-3d p-4 border-l-8 border-emerald-500">
+          <span class="text-xs font-black text-slate-400 uppercase">Rata-rata Nilai</span>
+          <div class="text-3xl font-black text-emerald-600 mt-1" id="stat-avg-score">0</div>
+        </div>
+        <div class="card-3d p-4 border-l-8 border-amber-500">
+          <span class="text-xs font-black text-slate-400 uppercase">Nilai Tertinggi</span>
+          <div class="text-3xl font-black text-amber-600 mt-1" id="stat-max-score">0</div>
+        </div>
+        <div class="card-3d p-4 border-l-8 border-rose-500">
+          <span class="text-xs font-black text-slate-400 uppercase">Perlu Bimbingan</span>
+          <div class="text-3xl font-black text-rose-600 mt-1" id="stat-remedial-count">0</div>
+        </div>
+      </div>
+
+      <!-- Filters & Canvasheet Table -->
+      <div class="card-3d p-6 overflow-hidden">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4 no-print">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black text-slate-500 uppercase">Filter Kelas:</span>
+            <select id="filter-class" onchange="renderTeacherTable()" class="px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs bg-slate-50 text-slate-700 outline-none">
+              <option value="ALL">Semua Kelas</option>
+              <option value="1A">Kelas 1A</option>
+              <option value="1B">Kelas 1B</option>
+            </select>
+          </div>
+          <div class="text-xs text-slate-400 font-semibold">
+            Diperbarui secara otomatis dari sesi siswa
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse" id="grades-table">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 text-xs font-black uppercase tracking-wider">
+                <th class="p-3.5 rounded-l-2xl">No</th>
+                <th class="p-3.5">Nama Peserta Didik</th>
+                <th class="p-3.5 text-center">Kelas</th>
+                <th class="p-3.5 text-center">Waktu Pengerjaan</th>
+                <th class="p-3.5 text-center">Jumlah Benar</th>
+                <th class="p-3.5 text-center">Jumlah Salah</th>
+                <th class="p-3.5 text-center">Nilai Akhir</th>
+                <th class="p-3.5 text-center no-print rounded-r-2xl">Detail Jawaban</th>
+              </tr>
+            </thead>
+            <tbody id="teacher-table-body" class="text-xs font-bold text-slate-700 divide-y divide-slate-100">
+              <!-- Baris nilai siswa di-render di sini -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tanda Tangan Cetak (Hanya tampil saat print) -->
+        <div class="print-only mt-12 flex justify-between text-xs font-bold text-black px-8">
+          <div>
+            <p>Mengetahui,</p>
+            <p>Kepala Sekolah SD Santo Yosef</p>
+            <br><br><br>
+            <p class="font-extrabold underline">( _______________________ )</p>
+            <p>NIP. ........................................</p>
+          </div>
+          <div>
+            <p id="print-date">Medan, 21 Oktober 2026</p>
+            <p>Guru Pendidikan Agama Katolik</p>
+            <br><br><br>
+            <p class="font-extrabold underline">( _______________________ )</p>
+            <p>NIP. ........................................</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: LOGIN GURU -->
+  <div id="modal-teacher-login" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="card-3d p-6 max-w-sm w-full text-center relative toast-anim">
+      <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-3 shadow-sm">
+        🔐
+      </div>
+      <h3 class="text-xl font-black text-slate-800 mb-1">Masuk Mode Guru</h3>
+      <p class="text-xs text-slate-500 font-semibold mb-4">Silakan masukkan password mode guru untuk mengelola daftar nilai.</p>
+
+      <div class="text-left mb-4">
+        <label class="block text-[11px] font-black text-slate-600 uppercase mb-1">Password Guru:</label>
+        <input type="password" id="input-teacher-password" placeholder="Masukkan password..." 
+          class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-amber-500 outline-none font-bold text-slate-700">
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closeTeacherLoginModal()" class="w-1/2 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded-2xl text-xs transition">
+          Batal
+        </button>
+        <button onclick="submitTeacherPassword()" class="w-1/2 py-3 btn-3d-amber text-xs font-black">
+          Buka Mode 🔓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DETAIL JAWABAN SISWA (MODE GURU) -->
+  <div id="modal-student-detail" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="card-3d p-6 max-w-2xl w-full max-h-[85vh] flex flex-col toast-anim">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+        <div>
+          <h3 class="text-lg font-black text-slate-800" id="detail-modal-name">Detail Lembar Jawaban Siswa</h3>
+          <p class="text-xs text-slate-500 font-semibold" id="detail-modal-meta">Kelas 1A &bull; Nilai: 90</p>
+        </div>
+        <button onclick="closeStudentDetailModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 font-black text-sm">
+          ✕
+        </button>
+      </div>
+
+      <!-- Scrollable Question List -->
+      <div class="overflow-y-auto flex-1 space-y-3 pr-2 text-xs" id="detail-modal-list">
+        <!-- Render detail 30 soal siswa di sini -->
+      </div>
+
+      <div class="pt-4 border-t border-slate-100 flex justify-end">
+        <button onclick="closeStudentDetailModal()" class="px-5 py-2.5 bg-slate-200 font-bold text-slate-700 rounded-xl text-xs">
+          Tutup Detail
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING INTERACTIVE NOTIFICATION TOAST -->
+  <div id="toast-container" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none flex flex-col items-center gap-2"></div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    /* =====================================================================
+       1. DATA BANK SOAL BAB 1 PENDIDIKAN AGAMA KATOLIK (30 NOMOR)
+       Berdasarkan Materi Dokumen:
+       - Subbab 1: Diriku (10 soal: 8 PG + 2 Isian)
+       - Subbab 2: Diriku Dicintai Tuhan (10 soal: 8 PG + 2 Isian)
+       - Subbab 3: Diriku dan Temanku (10 soal: 8 PG + 2 Isian)
+       ===================================================================== */
+    const QUESTION_BANK = [
+      // --- SUBBAB 1: DIRIKU (Nomor 1 - 10) ---
+      {
+        id: 1,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Identitas diri yang lengkap dan khas yang kita miliki merupakan anugerah dari...",
+        illustration: "",
+        options: ["Teman", "Guru", "Tuhan", "Kepala Sekolah"],
+        correctAnswer: "Tuhan"
+      },
+      {
+        id: 2,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Sikap yang baik saat bermain bersama teman yang memiliki perbedaan dengan kita adalah...",
+        illustration: "Sekelompok anak kelas 1 SD sedang bermain bersama di halaman sekolah dengan gembira dan rukun.",
+        options: ["Mengejek kekurangannya", "Menghormati dan menghargai kekhasannya", "Memusuhi teman yang berbeda", "Tidak mau berbagi mainan"],
+        correctAnswer: "Menghormati dan menghargai kekhasannya"
+      },
+      {
+        id: 3,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Hal penting yang perlu kita ketahui dan syukuri tentang diri sendiri adalah...",
+        illustration: "",
+        options: ["Nama dan keadaan diri apa adanya", "Keburukan orang lain", "Kelemahan teman", "Kesombongan"],
+        correctAnswer: "Nama dan keadaan diri apa adanya"
+      },
+      {
+        id: 4,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Tindakan merawat tubuh dengan rajin mandi, menggosok gigi, dan berpakaian rapi merupakan wujud rasa syukur kepada...",
+        illustration: "Seorang anak merawat tubuh dengan rajin mandi, menggosok gigi, dan berpakaian rapi.",
+        options: ["Diri sendiri", "Tuhan Yang Maha Esa", "Tetangga", "Pedagang"],
+        correctAnswer: "Tuhan Yang Maha Esa"
+      },
+      {
+        id: 5,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Akibat jika seseorang kurang mengenal identitas dan kemampuan dirinya sendiri adalah...",
+        illustration: "",
+        options: ["Menjadi anak yang percaya diri", "Mudah minder dan tidak mensyukuri karunia Tuhan", "Selalu gembira", "Disayang semua orang"],
+        correctAnswer: "Mudah minder dan tidak mensyukuri karunia Tuhan"
+      },
+      {
+        id: 6,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Sebelum dan sesudah melakukan kegiatan pembelajaran agama, sebaiknya kita membiasakan diri untuk...",
+        illustration: "",
+        options: ["Berdoa", "Tidur", "Bermain game", "Berlari-lari"],
+        correctAnswer: "Berdoa"
+      },
+      {
+        id: 7,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Sikap doa yang benar ditunjukkan saat berdoa di kelas, yaitu...",
+        illustration: "Anak berdoa dengan sikap tangan dilipat dan mata terpejam di dalam kelas dengan khusyuk.",
+        options: ["Berbicara dengan teman saat berdoa", "Berdoa dengan tenang, khusyuk, dan sungguh-sungguh", "Tertawa terbahak-bahak", "Berjalan-jalan mengelilingi ruangan"],
+        correctAnswer: "Berdoa dengan tenang, khusyuk, dan sungguh-sungguh"
+      },
+      {
+        id: 8,
+        subbab: "Subbab 1: Diriku",
+        type: "PG",
+        text: "Kekhasan atau keunikan yang ada pada diri setiap orang berguna untuk...",
+        illustration: "",
+        options: ["Menyombongkan diri", "Memperkaya dan memperindah kehidupan bersama", "Menyaingi teman", "Mencari musuh"],
+        correctAnswer: "Memperkaya dan memperindah kehidupan bersama"
+      },
+      {
+        id: 9,
+        subbab: "Subbab 1: Diriku",
+        type: "ISIAN",
+        text: "Sebutkan dua contoh anggota tubuh ciptaan Tuhan yang kamu miliki!",
+        illustration: "",
+        keywords: ["mata", "hidung", "telinga", "tangan", "kaki", "mulut", "rambut", "gigi", "jari"],
+        correctAnswer: "Contoh: Mata, hidung, telinga, tangan, atau kaki"
+      },
+      {
+        id: 10,
+        subbab: "Subbab 1: Diriku",
+        type: "ISIAN",
+        text: "Tuliskan satu kalimat ucapan syukur kepada Tuhan atas diciptakannya dirimu secara khas dan istimewa!",
+        illustration: "",
+        keywords: ["terima kasih", "syukur", "bersyukur", "tuhan", "puji", "kasih", "yesus"],
+        correctAnswer: "Contoh: Terima kasih Tuhan Yesus atas diriku yang istimewa"
+      },
+
+      // --- SUBBAB 2: DIRIKU DICINTAI TUHAN (Nomor 11 - 20) ---
+      {
+        id: 11,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Kasih Tuhan kepada setiap orang bersifat...",
+        illustration: "",
+        options: ["Pilih-pilih", "Tanpa batas / istimewa kepada semua orang", "Hanya kepada orang kaya", "Sementara waktu saja"],
+        correctAnswer: "Tanpa batas / istimewa kepada semua orang"
+      },
+      {
+        id: 12,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Yesus merangkul dan memberkati anak-anak dengan penuh kasih sayang. Hal ini membuktikan bahwa Ia...",
+        illustration: "Yesus merangkul dan memberkati anak-anak dengan penuh kasih sayang di taman.",
+        options: ["Marah kepada anak-anak", "Mencintai semua anak tanpa terkecuali", "Menjauhi anak-anak", "Tidak peduli dengan sesama"],
+        correctAnswer: "Mencintai semua anak tanpa terkecuali"
+      },
+      {
+        id: 13,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Bukti nyata bahwa Tuhan mencintai kita adalah diciptakannya kita dengan...",
+        illustration: "",
+        options: ["Tubuh dan kekhasan yang sempurna serta anugerah hidup", "Banyak masalah", "Rasa iri", "Kebencian"],
+        correctAnswer: "Tubuh dan kekhasan yang sempurna serta anugerah hidup"
+      },
+      {
+        id: 14,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Seorang anak sedang menengadahkan tangan berdoa sambil tersenyum bahagia mensyukuri hidupnya. Sikap ini menunjukkan bahwa ia menyadari...",
+        illustration: "Seorang anak sedang menengadahkan tangan berdoa sambil tersenyum bahagia mensyukuri hidupnya.",
+        options: ["Ditinggalkan orang lain", "Dicintai Tuhan secara istimewa", "Hidup sendirian", "Tidak berarti"],
+        correctAnswer: "Dicintai Tuhan secara istimewa"
+      },
+      {
+        id: 15,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Kisah dalam Kitab Suci yang menceritakan tentang kasih Allah dan perjalanan hidup tokoh iman masa lalu mengajarkan kita untuk selalu...",
+        illustration: "",
+        options: ["Berkeluh kesah", "Mengandalkan dan bersyukur kepada Tuhan", "Putus asa", "Membenci sesama"],
+        correctAnswer: "Mengandalkan dan bersyukur kepada Tuhan"
+      },
+      {
+        id: 16,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Lagu rohani yang sering dinyanyikan untuk mengingatkan bahwa Tuhan menyayangi semua anak adalah...",
+        illustration: "",
+        options: ["Balonku Ada Lima", "Yesus Cinta Semua Anak", "Naik-Naik ke Puncak Gunung", "Halo-Halo Bandung"],
+        correctAnswer: "Yesus Cinta Semua Anak"
+      },
+      {
+        id: 17,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Dua orang anak saling tersenyum ramah dan berbagi mainan dengan rukun di taman sekolah. Sikap terpuji ini mencerminkan ajaran Tuhan untuk saling...",
+        illustration: "Dua orang anak saling tersenyum ramah dan berbagi mainan dengan rukun di taman sekolah.",
+        options: ["Bermusuhan", "Mengasihi dan menghormati sesama", "Berkelahi", "Berkompetisi tidak sehat"],
+        correctAnswer: "Mengasihi dan menghormati sesama"
+      },
+      {
+        id: 18,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "PG",
+        text: "Bagaimana cara kita membalas cinta kasih Tuhan yang besar dalam kehidupan sehari-hari?",
+        illustration: "",
+        options: ["Berbuat jahat kepada teman", "Berbuat baik, taat perintah Tuhan, dan rajin berdoa", "Malas beribadah", "Suka berbohong"],
+        correctAnswer: "Berbuat baik, taat perintah Tuhan, dan rajin berdoa"
+      },
+      {
+        id: 19,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "ISIAN",
+        text: "Siapakah tokoh dalam Kitab Suci yang sering dibahas dalam kisah pembelajaran tentang kasih dan penyertaan Tuhan?",
+        illustration: "",
+        keywords: ["yesus", "tuhan", "allah", "daud", "samuel", "abraham", "musa", "maria", "yusuf"],
+        correctAnswer: "Tuhan Yesus / Allah Bapa"
+      },
+      {
+        id: 20,
+        subbab: "Subbab 2: Diriku Dicintai Tuhan",
+        type: "ISIAN",
+        text: "Tuliskan satu alasan mengapa kamu merasa bangga dan bersyukur dicintai oleh Tuhan!",
+        illustration: "",
+        keywords: ["hidup", "sehat", "keluarga", "berkat", "disayang", "dijaga", "selamat", "teman"],
+        correctAnswer: "Contoh: Karena Tuhan memberi saya nafas hidup, kesehatan, dan keluarga yang baik"
+      },
+
+      // --- SUBBAB 3 & 4: DIRIKU DAN TEMANKU & REFLEKSI (Nomor 21 - 30) ---
+      {
+        id: 21,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Meskipun kita berteman baik dengan orang lain, setiap manusia pasti memiliki...",
+        illustration: "",
+        options: ["Kesamaan yang mutlak dalam segala hal", "Perbedaan fisik dan sifat yang khas", "Wajah yang persis sama", "Suara yang tidak bisa dibedakan"],
+        correctAnswer: "Perbedaan fisik dan sifat yang khas"
+      },
+      {
+        id: 22,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Dua anak (laki-laki berambut pendek dan perempuan berambut panjang dikuncir) berdiri berdampingan tersenyum. Perbedaan fisik yang terlihat jelas adalah...",
+        illustration: "Dua anak (laki-laki berambut pendek dan perempuan berambut panjang dikuncir) berdiri berdampingan tersenyum.",
+        options: ["Jenis kelamin dan bentuk rambut", "Ukuran bumi", "Warna langit", "Jumlah guru"],
+        correctAnswer: "Jenis kelamin dan bentuk rambut"
+      },
+      {
+        id: 23,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Alasan penting mengapa Tuhan menciptakan manusia dengan berbagai perbedaan adalah agar kita...",
+        illustration: "",
+        options: ["Saling mengejek", "Saling mengenal, memperkaya, dan hidup rukun bersama", "Saling bermusuhan", "Terpecah belah"],
+        correctAnswer: "Saling mengenal, memperkaya, dan hidup rukun bersama"
+      },
+      {
+        id: 24,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Sekelompok anak dari berbagai latar belakang suku dan ciri fisik bergandengan tangan membentuk lingkaran persahabatan. Sikap ini merupakan contoh dari...",
+        illustration: "Sekelompok anak dari berbagai latar belakang suku dan ciri fisik bergandengan tangan membentuk lingkaran persahabatan.",
+        options: ["Sikap diskriminatif", "Sikap santun, rukun, dan tidak diskriminatif terhadap teman", "Sikap sombong", "Sikap acuh tak acuh"],
+        correctAnswer: "Sikap santun, rukun, dan tidak diskriminatif terhadap teman"
+      },
+      {
+        id: 25,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Lagu rohani yang mengajarkan kita tentang persaudaraan dalam iman adalah...",
+        illustration: "",
+        options: ["Dalam Yesus Kita Bersaudara", "Garuda Pancasila", "Dari Sabang Sampai Merauke", "Maju Tak Gentar"],
+        correctAnswer: "Dalam Yesus Kita Bersaudara"
+      },
+      {
+        id: 26,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Jika ada teman di kelas yang memiliki warna kulit atau bentuk rambut berbeda dengan kita, sikap kita seharusnya...",
+        illustration: "",
+        options: ["Menjauhi dan mengejeknya", "Menghormati dan tetap berteman baik dengannya", "Melaporkannya kepada polisi", "Marah-marah"],
+        correctAnswer: "Menghormati dan tetap berteman baik dengannya"
+      },
+      {
+        id: 27,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Seorang anak laki-laki membantu teman perempuannya yang jatuh tersandung saat lari di halaman sekolah. Tindakan menolong teman merupakan wujud dari...",
+        illustration: "Seorang anak laki-laki membantu teman perempuannya yang jatuh tersandung saat lari di halaman sekolah.",
+        options: ["Rasa hormat dan kasih sayang terhadap sesama", "Perbuatan usil", "Mencari perhatian guru", "Ketidaksengajaan"],
+        correctAnswer: "Rasa hormat dan kasih sayang terhadap sesama"
+      },
+      {
+        id: 28,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "PG",
+        text: "Bagaimana sikap yang benar terhadap teman yang berbeda pendapat dengan kita saat bermain?",
+        illustration: "",
+        options: ["Memaksa kehendak sendiri", "Mendengarkan dengan sabar dan mencari jalan damai bersama", "Berkelahi", "Pergi meninggalkan permainan"],
+        correctAnswer: "Mendengarkan dengan sabar dan mencari jalan damai bersama"
+      },
+      {
+        id: 29,
+        subbab: "Subbab 3: Diriku dan Temanku",
+        type: "ISIAN",
+        text: "Sebutkan dua contoh perbedaan fisik antara dirimu dan temanmu di kelas!",
+        illustration: "",
+        keywords: ["tinggi", "rambut", "kulit", "warna", "wajah", "hidung", "mata", "badan", "kelamin"],
+        correctAnswer: "Contoh: Perbedaan jenis rambut dan tinggi badan"
+      },
+      {
+        id: 30,
+        subbab: "Subbab 4: Refleksi & Syukur",
+        type: "ISIAN",
+        text: "Bagaimanakah sikap yang seharusnya kamu tunjukkan kepada teman yang memiliki fisik atau sifat yang berbeda dari dirimu?",
+        illustration: "",
+        keywords: ["menghargai", "menghormati", "rukun", "menyayangi", "damai", "teman", "baik", "menolong"],
+        correctAnswer: "Sikap saling menghormati, mengasihi, dan hidup rukun bersama"
+      }
+    ];
+
+    /* =====================================================================
+       2. STATE MANAJEMEN APLIKASI
+       ===================================================================== */
+    let currentStudent = {
+      name: "",
+      class: "1A",
+      answers: {}, // { [questionId]: { studentAnswer, isCorrect, isLocked } }
+      startTime: null,
+      score: 0,
+      correctCount: 0,
+      wrongCount: 0
+    };
+
+    let randomizedQuestions = [];
+    let currentQuestionIndex = 0;
+    let timerInterval = null;
+    let remainingSeconds = 60 * 60; // 60 menit
+
+    // Pre-seeded database untuk daftar nilai guru
+    const INITIAL_RECORDS = [
+      { id: "S01", name: "Gabriel Kristanto", class: "1A", time: "18 Menit", correct: 28, wrong: 2, score: 93, answers: {} },
+      { id: "S02", name: "Maria Clara", class: "1A", time: "22 Menit", correct: 30, wrong: 0, score: 100, answers: {} },
+      { id: "S03", name: "Ignatius Ryan", class: "1B", time: "25 Menit", correct: 26, wrong: 4, score: 87, answers: {} },
+      { id: "S04", name: "Theresia Angel", class: "1B", time: "20 Menit", correct: 27, wrong: 3, score: 90, answers: {} }
+    ];
+
+    function getStoredRecords() {
+      try {
+        const data = localStorage.getItem("PAK_EXAM_RECORDS");
+        return data ? JSON.parse(data) : INITIAL_RECORDS;
+      } catch (e) {
+        return INITIAL_RECORDS;
+      }
+    }
+
+    function saveRecord(record) {
+      try {
+        const records = getStoredRecords();
+        records.unshift(record);
+        localStorage.setItem("PAK_EXAM_RECORDS", JSON.stringify(records));
+      } catch (e) {
+        console.error("Gagal menyimpan ke localStorage", e);
+      }
+    }
+
+    /* =====================================================================
+       3. AUDIO FEEDBACK (WEB AUDIO API)
+       ===================================================================== */
+    function playAudioTone(type) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'correct') {
+          // Cheerful ascending arpeggio
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+          osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.5);
+        } else if (type === 'wrong') {
+          // Encouraging gentle low bounce
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.4);
+        }
+      } catch (e) {
+        // Abaikan jika audio tidak didukung
+      }
+    }
+
+    /* =====================================================================
+       4. PENGACAKAN OPSI & SOAL (SHUFFLE)
+       ===================================================================== */
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    /* =====================================================================
+       5. ALUR SISWA: LOGIN & MULAI UJIAN
+       ===================================================================== */
+    function startExam() {
+      const nameInput = document.getElementById("input-student-name").value.trim();
+      const classInput = document.querySelector('input[name="student-class"]:checked').value;
+
+      if (!nameInput) {
+        showToast("Eits, silakan tulis nama lengkapmu dulu ya! 😊", "warning");
+        document.getElementById("input-student-name").focus();
+        return;
+      }
+
+      currentStudent.name = nameInput;
+      currentStudent.class = classInput;
+      currentStudent.answers = {};
+      currentStudent.startTime = new Date();
+
+      // Deep copy soal dan acak opsi pilihan ganda
+      randomizedQuestions = QUESTION_BANK.map(q => {
+        if (q.type === "PG") {
+          return {
+            ...q,
+            shuffledOptions: shuffleArray(q.options)
+          };
+        }
+        return { ...q };
+      });
+
+      // Update Nav Pill
+      document.getElementById("pill-name").textContent = currentStudent.name;
+      document.getElementById("pill-class").textContent = currentStudent.class;
+      document.getElementById("user-pill").classList.remove("hidden");
+      document.getElementById("btn-logout").classList.remove("hidden");
+
+      // Beralih view
+      document.getElementById("view-student-login").classList.add("hidden");
+      document.getElementById("view-student-exam").classList.remove("hidden");
+
+      // Inisialisasi Timer 60 Menit
+      remainingSeconds = 60 * 60;
+      updateTimerDisplay();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        remainingSeconds--;
+        updateTimerDisplay();
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          showToast("Waktu 60 menit telah habis! Ujian otomatis disimpan. ⏰", "warning");
+          finishExam();
+        }
+      }, 1000);
+
+      // Render Soal Pertama & Grid
+      currentQuestionIndex = 0;
+      renderQuestionGrid();
+      loadQuestion(currentQuestionIndex);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(remainingSeconds / 60);
+      const seconds = remainingSeconds % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      const timerEl = document.getElementById("exam-timer");
+      if (timerEl) {
+        timerEl.textContent = formatted;
+        if (remainingSeconds < 300) {
+          timerEl.classList.add("text-rose-600");
+          timerEl.classList.remove("text-amber-600");
+        }
+      }
+    }
+
+    /* =====================================================================
+       6. RENDERING SOAL & INTERAKSI JAWABAN
+       ===================================================================== */
+    function loadQuestion(index) {
+      if (index < 0 || index >= randomizedQuestions.length) return;
+      currentQuestionIndex = index;
+      const q = randomizedQuestions[index];
+
+      // Update Header Soal
+      document.getElementById("question-number-badge").textContent = `Soal No. ${index + 1}`;
+      document.getElementById("question-type-badge").textContent = q.type === "PG" ? "Pilihan Ganda" : "Isian Singkat";
+      document.getElementById("current-subbab-title").textContent = q.subbab;
+      document.getElementById("question-text").textContent = q.text;
+
+      // Ilustrasi jika ada
+      const illusBox = document.getElementById("question-illustration");
+      const illusText = document.getElementById("illustration-text");
+      if (q.illustration) {
+        illusText.textContent = q.illustration;
+        illusBox.classList.remove("hidden");
+      } else {
+        illusBox.classList.add("hidden");
+      }
+
+      // Cek Status Pengerjaan Soal ini
+      const saved = currentStudent.answers[q.id];
+      const statusPill = document.getElementById("question-status-pill");
+
+      if (saved) {
+        if (saved.isCorrect) {
+          statusPill.textContent = "Terjawab Benar 👍";
+          statusPill.className = "text-xs font-extrabold px-3 py-1 rounded-xl bg-emerald-100 text-emerald-700";
+        } else {
+          statusPill.textContent = "Salah & Terkunci 🔒";
+          statusPill.className = "text-xs font-extrabold px-3 py-1 rounded-xl bg-rose-100 text-rose-700";
+        }
+      } else {
+        statusPill.textContent = "Belum Dijawab";
+        statusPill.className = "text-xs font-extrabold px-3 py-1 rounded-xl bg-slate-100 text-slate-500";
+      }
+
+      // Container PG vs Isian
+      const optionsContainer = document.getElementById("options-container");
+      const essayContainer = document.getElementById("essay-container");
+
+      if (q.type === "PG") {
+        optionsContainer.classList.remove("hidden");
+        essayContainer.classList.add("hidden");
+        optionsContainer.innerHTML = "";
+
+        q.shuffledOptions.forEach((optText, optIdx) => {
+          const letter = String.fromCharCode(65 + optIdx);
+          const btn = document.createElement("button");
+          btn.className = "option-btn w-full p-4 flex items-center gap-3 text-slate-700 font-bold text-sm md:text-base";
+
+          // Format tombol
+          btn.innerHTML = `
+            <span class="w-8 h-8 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center font-black text-slate-600 text-xs shrink-0">${letter}</span>
+            <span class="flex-1">${optText}</span>
+          `;
+
+          // Cek jika sudah dijawab / terkunci
+          if (saved) {
+            btn.disabled = true;
+            if (saved.studentAnswer === optText) {
+              if (saved.isCorrect) {
+                btn.classList.add("correct");
+              } else {
+                btn.classList.add("locked-wrong");
+              }
+            }
+          } else {
+            btn.onclick = () => selectOption(q.id, optText, q.correctAnswer);
+          }
+
+          optionsContainer.appendChild(btn);
+        });
+      } else {
+        // Tipe ISIAN
+        optionsContainer.classList.add("hidden");
+        essayContainer.classList.remove("hidden");
+        const inputEssay = document.getElementById("input-essay");
+        const btnSubmit = document.getElementById("btn-submit-essay");
+
+        if (saved) {
+          inputEssay.value = saved.studentAnswer;
+          inputEssay.disabled = true;
+          btnSubmit.disabled = true;
+          btnSubmit.classList.add("opacity-50", "cursor-not-allowed");
+        } else {
+          inputEssay.value = "";
+          inputEssay.disabled = false;
+          btnSubmit.disabled = false;
+          btnSubmit.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+      }
+
+      // Update Tombol Navigasi Prev/Next
+      document.getElementById("btn-prev").disabled = (index === 0);
+      document.getElementById("btn-next").disabled = (index === randomizedQuestions.length - 1);
+
+      updateAnsweredCounter();
+      renderQuestionGrid();
+    }
+
+    function selectOption(questionId, selectedAnswer, correctAnswer) {
+      // Periksa apakah jawaban benar
+      const isCorrect = (selectedAnswer === correctAnswer);
+
+      // Simpan status jawaban
+      currentStudent.answers[questionId] = {
+        studentAnswer: selectedAnswer,
+        correctAnswer: correctAnswer,
+        isCorrect: isCorrect,
+        isLocked: !isCorrect // Jika salah, otomatis terkunci!
+      };
+
+      if (isCorrect) {
+        playAudioTone('correct');
+        showToast("yeah, kamu menjawab dengan benar! 👍", "success");
+        triggerMiniConfetti();
+      } else {
+        playAudioTone('wrong');
+        showToast("Maaf, kamu belum berhasil, belajar lebih giat lagi ya! 💪✨", "wrong");
+      }
+
+      // Re-render kartu soal untuk menerapkan status kunci
+      loadQuestion(currentQuestionIndex);
+    }
+
+    function submitEssayAnswer() {
+      const inputEl = document.getElementById("input-essay");
+      const answerVal = inputEl.value.trim();
+
+      if (!answerVal) {
+        showToast("Tuliskan jawabanmu terlebih dahulu ya! ✍️", "warning");
+        inputEl.focus();
+        return;
+      }
+
+      const q = randomizedQuestions[currentQuestionIndex];
+      // Cek kecocokan toleran dengan kata kunci
+      const normalized = answerVal.toLowerCase();
+      const isCorrect = q.keywords.some(kw => normalized.includes(kw));
+
+      currentStudent.answers[q.id] = {
+        studentAnswer: answerVal,
+        correctAnswer: q.correctAnswer,
+        isCorrect: isCorrect,
+        isLocked: !isCorrect // Jika salah, otomatis terkunci!
+      };
+
+      if (isCorrect) {
+        playAudioTone('correct');
+        showToast("yeah, kamu menjawab dengan benar! 👍", "success");
+        triggerMiniConfetti();
+      } else {
+        playAudioTone('wrong');
+        showToast("Maaf, kamu belum berhasil, belajar lebih giat lagi ya! 💪✨", "wrong");
+      }
+
+      loadQuestion(currentQuestionIndex);
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        loadQuestion(currentQuestionIndex - 1);
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < randomizedQuestions.length - 1) {
+        loadQuestion(currentQuestionIndex + 1);
+      }
+    }
+
+    function renderQuestionGrid() {
+      const grid = document.getElementById("question-grid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      randomizedQuestions.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.textContent = idx + 1;
+        btn.className = "w-full aspect-square rounded-xl text-xs font-black transition flex items-center justify-center border-2";
+
+        const saved = currentStudent.answers[q.id];
+
+        if (idx === currentQuestionIndex) {
+          btn.classList.add("ring-2", "ring-sky-500", "ring-offset-2");
+        }
+
+        if (saved) {
+          if (saved.isCorrect) {
+            btn.classList.add("bg-emerald-500", "text-white", "border-emerald-600");
+          } else {
+            btn.classList.add("bg-rose-500", "text-white", "border-rose-600");
+          }
+        } else {
+          btn.classList.add("bg-slate-100", "text-slate-600", "border-slate-200", "hover:bg-slate-200");
+        }
+
+        btn.onclick = () => loadQuestion(idx);
+        grid.appendChild(btn);
+      });
+    }
+
+    function updateAnsweredCounter() {
+      const totalAnswered = Object.keys(currentStudent.answers).length;
+      document.getElementById("answered-counter").textContent = `${totalAnswered} / ${randomizedQuestions.length}`;
+    }
+
+    /* =====================================================================
+       7. SELESAI UJIAN & PERHITUNGAN NILAI
+       ===================================================================== */
+    function confirmFinishExam() {
+      const totalAnswered = Object.keys(currentStudent.answers).length;
+      const unanswered = randomizedQuestions.length - totalAnswered;
+
+      let msg = "Apakah kamu yakin ingin menyelesaikan ujian sekarang?";
+      if (unanswered > 0) {
+        msg = `Masih ada ${unanswered} soal yang belum kamu kerjakan. Yakin ingin keluar dan melihat nilaimu?`;
+      }
+
+      if (confirm(msg)) {
+        finishExam();
+      }
+    }
+
+    function finishExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      // Hitung skor
+      let correct = 0;
+      let wrong = 0;
+
+      randomizedQuestions.forEach(q => {
+        const ans = currentStudent.answers[q.id];
+        if (ans) {
+          if (ans.isCorrect) correct++;
+          else wrong++;
+        } else {
+          wrong++; // Tidak terjawab dihitung belum benar
+        }
+      });
+
+      const total = randomizedQuestions.length;
+      const finalScore = Math.round((correct / total) * 100);
+
+      currentStudent.correctCount = correct;
+      currentStudent.wrongCount = wrong;
+      currentStudent.score = finalScore;
+
+      // Hitung durasi pengerjaan
+      const elapsedSeconds = (60 * 60) - remainingSeconds;
+      const elapsedMinutes = Math.max(1, Math.round(elapsedSeconds / 60));
+
+      // Simpan record ke database guru
+      const newRecord = {
+        id: "REC-" + Date.now().toString().slice(-5),
+        name: currentStudent.name,
+        class: currentStudent.class,
+        time: `${elapsedMinutes} Menit`,
+        correct: correct,
+        wrong: wrong,
+        score: finalScore,
+        answers: { ...currentStudent.answers }
+      };
+      saveRecord(newRecord);
+
+      // Tampilkan View Hasil Siswa
+      document.getElementById("view-student-exam").classList.add("hidden");
+      document.getElementById("view-student-result").classList.remove("hidden");
+
+      document.getElementById("res-student-name").textContent = currentStudent.name;
+      document.getElementById("res-student-class").textContent = `Kelas ${currentStudent.class}`;
+      document.getElementById("res-final-score").textContent = finalScore;
+      document.getElementById("res-correct-count").textContent = correct;
+      document.getElementById("res-wrong-count").textContent = wrong;
+
+      const statusEl = document.getElementById("res-score-status");
+      const emojiEl = document.getElementById("result-emoji");
+
+      if (finalScore >= 85) {
+        statusEl.textContent = "Sangat Memuaskan! 🌟";
+        emojiEl.textContent = "🏆";
+        triggerBigConfetti();
+      } else if (finalScore >= 70) {
+        statusEl.textContent = "Bagus Sekali! Pertahankan ya 👍";
+        emojiEl.textContent = "🎉";
+        triggerMiniConfetti();
+      } else {
+        statusEl.textContent = "Tetap Semangat & Belajar Lebih Giat ya! 💪";
+        emojiEl.textContent = "✨";
+      }
+    }
+
+    /* =====================================================================
+       8. MODE GURU (TEACHER DASHBOARD)
+       ===================================================================== */
+    function openTeacherLoginModal() {
+      document.getElementById("modal-teacher-login").classList.remove("hidden");
+      document.getElementById("input-teacher-password").value = "";
+      document.getElementById("input-teacher-password").focus();
+    }
+
+    function closeTeacherLoginModal() {
+      document.getElementById("modal-teacher-login").classList.add("hidden");
+    }
+
+    function submitTeacherPassword() {
+      const pwd = document.getElementById("input-teacher-password").value.trim();
+      
+      // Validasi Password Guru: Katolik29
+      if (pwd === "Katolik29") {
+        closeTeacherLoginModal();
+        showToast("Berhasil masuk Mode Guru! 🔓", "success");
+        switchToTeacherDashboard();
+      } else {
+        showToast("password anda salah", "wrong");
+        document.getElementById("input-teacher-password").value = "";
+        document.getElementById("input-teacher-password").focus();
+      }
+    }
+
+    function switchToTeacherDashboard() {
+      // Sembunyikan view lainnya
+      document.getElementById("view-student-login").classList.add("hidden");
+      document.getElementById("view-student-exam").classList.add("hidden");
+      document.getElementById("view-student-result").classList.add("hidden");
+      document.getElementById("btn-switch-mode").classList.add("hidden");
+
+      // Tampilkan Dashboard Guru
+      document.getElementById("view-teacher-dashboard").classList.remove("hidden");
+      document.getElementById("btn-logout").classList.remove("hidden");
+
+      renderTeacherTable();
+    }
+
+    function renderTeacherTable() {
+      const records = getStoredRecords();
+      const filterClass = document.getElementById("filter-class").value;
+      const tbody = document.getElementById("teacher-table-body");
+      tbody.innerHTML = "";
+
+      let filtered = records;
+      if (filterClass !== "ALL") {
+        filtered = records.filter(r => r.class === filterClass);
+      }
+
+      // Update Statistik Metrik
+      const totalStudents = filtered.length;
+      document.getElementById("stat-total-students").textContent = totalStudents;
+
+      if (totalStudents > 0) {
+        const totalScore = filtered.reduce((acc, r) => acc + r.score, 0);
+        const avg = Math.round(totalScore / totalStudents);
+        const max = Math.max(...filtered.map(r => r.score));
+        const remedial = filtered.filter(r => r.score < 75).length;
+
+        document.getElementById("stat-avg-score").textContent = avg;
+        document.getElementById("stat-max-score").textContent = max;
+        document.getElementById("stat-remedial-count").textContent = remedial;
+      } else {
+        document.getElementById("stat-avg-score").textContent = "0";
+        document.getElementById("stat-max-score").textContent = "0";
+        document.getElementById("stat-remedial-count").textContent = "0";
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center p-6 text-slate-400 font-bold">Belum ada data siswa untuk kelas ini.</td></tr>`;
+        return;
+      }
+
+      filtered.forEach((r, idx) => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-50/80 transition";
+
+        // Score badge color
+        let scoreClass = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        if (r.score < 75) scoreClass = "bg-rose-100 text-rose-800 border-rose-300";
+        else if (r.score < 85) scoreClass = "bg-amber-100 text-amber-800 border-amber-300";
+
+        tr.innerHTML = `
+          <td class="p-3.5 text-slate-400">${idx + 1}</td>
+          <td class="p-3.5 font-black text-slate-800">${r.name}</td>
+          <td class="p-3.5 text-center"><span class="px-2.5 py-1 bg-sky-100 text-sky-700 font-black rounded-lg text-[11px]">${r.class}</span></td>
+          <td class="p-3.5 text-center text-slate-500">${r.time || "20 Menit"}</td>
+          <td class="p-3.5 text-center text-emerald-600 font-black">${r.correct} / 30</td>
+          <td class="p-3.5 text-center text-rose-600 font-black">${r.wrong}</td>
+          <td class="p-3.5 text-center">
+            <span class="px-3 py-1 rounded-xl font-black text-xs border ${scoreClass}">
+              ${r.score}
+            </span>
+          </td>
+          <td class="p-3.5 text-center no-print">
+            <button onclick="viewStudentDetail('${r.id}')" class="px-3 py-1.5 bg-sky-100 hover:bg-sky-200 text-sky-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 mx-auto">
+              <span>Detail</span> 🔍
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function viewStudentDetail(recordId) {
+      const records = getStoredRecords();
+      const rec = records.find(r => r.id === recordId);
+      if (!rec) return;
+
+      document.getElementById("detail-modal-name").textContent = `Detail Jawaban: ${rec.name}`;
+      document.getElementById("detail-modal-meta").textContent = `Kelas ${rec.class} • Benar: ${rec.correct} • Salah: ${rec.wrong} • Nilai: ${rec.score}`;
+
+      const container = document.getElementById("detail-modal-list");
+      container.innerHTML = "";
+
+      QUESTION_BANK.forEach((q, idx) => {
+        const ans = rec.answers ? rec.answers[q.id] : null;
+        const item = document.createElement("div");
+        item.className = "p-3 rounded-2xl border text-xs";
+
+        const isCorrect = ans ? ans.isCorrect : false;
+        const studentAns = ans ? ans.studentAnswer : "(Tidak dijawab)";
+
+        if (isCorrect) {
+          item.className += " bg-emerald-50/70 border-emerald-200 text-emerald-950";
+        } else {
+          item.className += " bg-rose-50/70 border-rose-200 text-rose-950";
+        }
+
+        item.innerHTML = `
+          <div class="flex items-center justify-between font-black mb-1">
+            <span>No. ${idx + 1} &bull; ${q.subbab}</span>
+            <span class="px-2 py-0.5 rounded-lg text-[10px] font-black ${isCorrect ? 'bg-emerald-200 text-emerald-800' : 'bg-rose-200 text-rose-800'}">
+              ${isCorrect ? 'BENAR 👍' : 'SALAH (TERKUNCI) 🔒'}
+            </span>
+          </div>
+          <p class="font-bold text-slate-700 mb-1.5">${q.text}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[11px]">
+            <div><span class="text-slate-400 font-bold">Jawaban Siswa:</span> <span class="font-black ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${studentAns}</span></div>
+            <div><span class="text-slate-400 font-bold">Kunci:</span> <span class="font-bold text-slate-600">${q.correctAnswer}</span></div>
+          </div>
+        `;
+
+        container.appendChild(item);
+      });
+
+      document.getElementById("modal-student-detail").classList.remove("hidden");
+    }
+
+    function closeStudentDetailModal() {
+      document.getElementById("modal-student-detail").classList.add("hidden");
+    }
+
+    /* =====================================================================
+       9. LOGOUT & UTILITAS UMUM
+       ===================================================================== */
+    function logout() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      // Reset tampilan ke Login Siswa
+      document.getElementById("view-teacher-dashboard").classList.add("hidden");
+      document.getElementById("view-student-exam").classList.add("hidden");
+      document.getElementById("view-student-result").classList.add("hidden");
+      document.getElementById("view-student-login").classList.remove("hidden");
+
+      document.getElementById("btn-switch-mode").classList.remove("hidden");
+      document.getElementById("btn-logout").classList.add("hidden");
+      document.getElementById("user-pill").classList.add("hidden");
+
+      document.getElementById("input-student-name").value = "";
+      showToast("Berhasil logout. Sampai jumpa lagi! 👋", "info");
+    }
+
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toast-container");
+      const toast = document.createElement("div");
+      
+      let bg = "bg-slate-800 text-white";
+      if (type === "success") bg = "bg-emerald-600 text-white shadow-emerald-200";
+      if (type === "wrong") bg = "bg-rose-600 text-white shadow-rose-200";
+      if (type === "warning") bg = "bg-amber-500 text-white shadow-amber-200";
+
+      toast.className = `${bg} px-6 py-3.5 rounded-2xl font-extrabold text-xs md:text-sm shadow-xl flex items-center gap-2 pointer-events-auto toast-anim border-2 border-white/40`;
+      toast.innerHTML = `<span>${message}</span>`;
+
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function triggerMiniConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 35,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+      }
+    }
+
+    function triggerBigConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
